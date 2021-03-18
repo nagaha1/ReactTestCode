@@ -1,72 +1,37 @@
 import React,{ useState } from 'react';
 
-const App = () => {
-  const [count, setCount] = useState(0);
-  
-  // console.log({count});
-  // console.log({setCount});
-  
-  const increment = () => setCount(
-                              count + 1,
-                              console.log(count),
-                              console.log("bbbbbeeeeeeeee")
-                          );
+const App = props => {
+  const [name,setName] = useState(props.name);
+  const [price,setPrice] = useState(props.price);
 
-  const decrement = () => setCount(count - 1);                        
-  const increment2 = () => setCount(testCount => testCount + 1);                        
-  // const decrement2 = () => setCount(testCount => testCount - 1);                        
-  const decrement2 = () => setCount(
-    function test(){
-      //これでやるなら、returnをちゃんとしないとだめ
-      return count - 10;
-    }
-  );                        
-  
-  //この実装センスある気がする。
-  // const reset = () => setCount(
-  //   count - count
-  // );
-
-  // 違った
-  // これの方がスマート
-  const reset = () => setCount(0);
-
-  const xx = () => setCount(count*2);
-
-  const san = () => setCount(
-    //関数を書かないと
-    //仮引数として、countが来ますと
-    function sanSet(a){
-      if(a % 3 === 0){
-        return a / 3
-      }else{
-        return a
-      }
-    }
-  );
+  //このようにしてまとめているのね
+  const reset = () => {
+    setPrice(props.price)
+    setName(props.name)
+  }
 
   return (
     <>
-      <div>
-        count: {count}
-      </div>
-      <div>
-        <button onClick={increment}>+1</button>
-        <button onClick={decrement}>-1</button>
-      </div>
-      <div>
-        <button onClick={increment2}>+1</button>
-        <button onClick={decrement2}>-1</button>
-      </div>
-      <div>
-        <button onClick={reset}>Reset</button>
-      </div>
-      <div>
-        <button onClick={xx}>X2</button>
-        <button onClick={san}>3の倍数のときだけ3で割ります</button>
-      </div>
+      <p>現在の{name}は、{price}円です。</p>
+      <p>現在の{name}は、{price + 222}円です。</p>
+      <button onClick={() => setPrice(price + 1)}>+1</button>
+      <button onClick={() => setPrice(price + 1)}>-1</button>
+      <button onClick={reset}>Reset</button>
+      <input value={name} onChange={
+        //setNameで状態をとっているので書き換えているだけ。
+        e => setName(e.target.value)
+      }/>
     </>
   );
+
+  
+}
+
+//これでやると外部から引数とる
+//ページをリロードしたらできました。
+App.defaultProps = {
+  name: "sample",
+  price: 1000
 }
 
 export default App;
