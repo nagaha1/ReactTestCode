@@ -29,7 +29,7 @@ const App = props => {
   }, [state.name]);
 
 
-  
+
   const renderPeriod = () => {
     console.log("renderPeriod rendees sssss");
     return "○";
