@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const App = props => {
   // const [name, setName] = useState(props);
@@ -7,6 +7,33 @@ const App = props => {
   // stateを個々に渡していたが、まとめてオブジェクトを渡せます
   const [name, setName] = useState(props.name);
   const [price, setPrice] = useState(props.price);
+
+  // レンダリングの後で、useEffectは実行されている
+  // DOMがレンダリングされた後に、される度に実行がされます
+  useEffect(() => {
+    console.log("useEffictが取得");
+  });
+
+  // useEffectを最初のレンダリングのタイミングの時だけ実行した場合は？
+  // 空の配列を渡してあげます
+  //第二引数としてからの配列を渡す
+  // 特定のDOMの描画するタイミングの時に実行する、、
+  useEffect(() => {
+    console.log("最初のレンダリングのタイミングの時だけしか、、、");
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      "第二引数の配列の中の要素が呼ばれたタイミングでこちらが呼ばれます"
+    );
+  }, [state.name]);
+
+
+  
+  const renderPeriod = () => {
+    console.log("renderPeriod rendees sssss");
+    return "○";
+  };
 
   //このようにしてまとめているのね
   const reset = () => {
@@ -19,7 +46,7 @@ const App = props => {
   return (
     <>
       <p>
-        現在の{state.name}は、{state.price}円です。
+        現在の{state.name}は、{state.price}円です。 {renderPeriod()}
       </p>
       <p>
         現在の{name}は、{price}円です。
