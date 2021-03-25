@@ -7,6 +7,7 @@ const events = (state = [], action) => {
         case "CREATE_EVENT":
             const event = {title: action.title, body: action.body}
             const lengeth = state.length;
+            //ああでも、ここのidとかの動きがわからんのです。
             const id = lengeth === 0 ? 1 : state[lengeth - 1].id + 1;
             // let id;
             // if(lengeth === 0){
