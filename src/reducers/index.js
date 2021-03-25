@@ -10,10 +10,11 @@ const events = (state = [], action) => {
             const id = lengeth === 0 ? 1 : state[lengeth - 1].id + 1;
             // let id;
             // if(lengeth === 0){
-
+            //      id = 1;
             // }else{
             //     state[lengeth - 1].id + 1;
             // }
+            //このreturnで...stateで現在の要素、{id: id, ...event}で現在の要素の次に新たな要素を返しています。
             return [...state,{id: id, ...event}];
         case "DELETE_EVENT":
             return state;
