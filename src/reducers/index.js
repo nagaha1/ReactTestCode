@@ -1,5 +1,21 @@
 
+action = {
+    type: "CREATE_EVENT",
+    titile: "イベントフォームのタイトルが来ます",
+    body: "イベントフォームのボディがきます"
+}
+
 //状態がある、場合と、ない場合で考察をすればOKです。
+//状態がない場合
+state = [];
+//状態がある場合
+state = [
+    { id: 1, titile: "タイトル1", body: "ボディ1"},
+    { id: 2, titile: "タイトル2", body: "ボディ2"},
+    { id: 3, titile: "タイトル3", body: "ボディ3"}
+    
+];
+
 
 const events = (state = [], action) => {
     // actionにはtypeという属性が必ず渡ってきます
