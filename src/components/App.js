@@ -28,6 +28,19 @@ const App = () => {
     setBody("");
   }
 
+  //全てのイベントを削除する
+  const dellEvent = (e) => {
+    //再レンダリングを抑止するためにeの仮引数で、e.preventDefault();としてます。
+    e.preventDefault();
+
+    dispatch({
+      type: "DELETE_ALL_EVENT",
+      title,
+      body
+    });
+
+  }
+
   console.log({state});
 
   return(
@@ -46,7 +59,7 @@ const App = () => {
           </div>
 
           <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
-          <button className="btn btn-danger">全てのイベントを削除する</button>
+          <button className="btn btn-danger" onClick={dellEvent}>全てのイベントを削除する</button>
           <h4>イベント一覧</h4>
           <table className="table table-hover">
             <thead>
