@@ -23,6 +23,28 @@ const App = () => {
     setBody('')
   }
 
+  //レンダリングされていたから、なんか削除されたいたように見えていただけです。ね。
+  const deleteAllEvents = (e) => {
+    e.preventDefault();
+    const result = window.confirm("全てのイベントを本当に削除してもよいですか？");
+
+    if(result){dispatch({ type: "DELETE_ALL_EVENTS"});}
+      
+  }
+  
+  const unCreatable = title === "" || body === "";
+
+  // 変数使ってもいいけどこれぐらいだったら直接書いたほうが良い
+  // const unCre = state.length === 0;
+  
+  // 下記でもいいけど長い
+  // var unCreatable = true;
+  // if(title === "" || body === ""){
+  //   unCreatable = true;
+  // }else{
+  //   unCreatable = false;
+  // }
+
   return (
     <div className="container-fluid">
       <h4>イベント作成フォーム</h4>
@@ -37,8 +59,8 @@ const App = () => {
           <textarea className="form-control" id="formEventBody" value={body} onChange={e => setBody(e.target.value)}/>
         </div>
 
-        <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
-        <button className="btn btn-danger">全てのイベントを削除する</button>
+        <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>イベントを作成する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>全てのイベントを削除する</button>
       </form>
 
       <h4>イベント一覧</h4>
@@ -54,24 +76,6 @@ const App = () => {
         <tbody>
           {/* これタイプミスとかではなくて、使用が変わっている気がする */}
           { state.map((event, index) => (<Event key={index} event={event} dispatch={dispatch} />))}
-          {/* {
-            state.map((event,index) => {
-              const id = event.id
-              const handleClickDeleteButton = () => {
-                dispatch({type: "DELETE_EVENT", id})
-              }
-
-              return (
-                //この書き方だと上手く表示されない理由がわからない
-                <tr key={index}>
-                  <tb>{id}</tb>
-                  <tb>{event.title}</tb>
-                  <tb>{event.body}</tb>
-                  <tb><button type="button" className="btn btn-danger" onClick={handleClickDeleteButton}>削除</button></tb>
-                </tr>
-              )
-            })
-          } */}
         </tbody>
       </table>
     </div>
