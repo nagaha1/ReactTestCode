@@ -2,6 +2,8 @@
 
 import React,{useState} from "react"
 
+import {CREATE_EVENT,DELETE_ALL_EVENTS} from "../actions"
+
 const EventFrom = ({state, dispatch}) => {
     // const [state, dispatch] = useReducer(reducer, [])
     const [title, setTitle] = useState('')
@@ -11,7 +13,7 @@ const EventFrom = ({state, dispatch}) => {
         e.preventDefault()
         
         dispatch({
-            type: 'CREATE_EVENT',
+            type: CREATE_EVENT,
             title,
             body
         })
@@ -25,7 +27,7 @@ const EventFrom = ({state, dispatch}) => {
         e.preventDefault();
         const result = window.confirm("全てのイベントを本当に削除してもよいですか？");
         
-        if(result){dispatch({ type: "DELETE_ALL_EVENTS"});}        
+        if(result){dispatch({ type: DELETE_ALL_EVENTS});}        
     }
     
     const unCreatable = title === "" || body === "";
